@@ -1,33 +1,19 @@
-import java.util.Scanner;
-
-public class SumTwoArrays 
+void Pyramid(int n)
 {
-	public static void main(String[] args) 
-	{	
-		Scanner s = new Scanner(System.in);
+	int k = 2 * n - 2;
 
-		int N = s.nextInt();	
-		int[] ArrayA = new int[N];
-		int[] ArrayB = new int[N];
-		int[] sumArray = new int[N];
-				
-		for(int i=0; i<N; i++) 
+	for (int i = 0; i<n; i++)
+	{
+		for (int j = 0; j<k; j++)
+			cout << " ";
+
+		k = k - 1;
+
+		for (int j = 0; j <= i; j++)
 		{
-			ArrayA[i] = s.nextInt();
-		}		
-		for(int i=0; i<N; i++) 
-		{
-			ArrayB[i] = s.nextInt();
-		}		
-		for(int i=0; i<N; i++)
-		{
-		    sumArray[i] = ArrayA[i] + ArrayB[i];
+			cout << "* ";
 		}
-		for(int i=0; i<N; i++) 
-		{
-			System.out.print(sumArray[i] + " ");
-		}       
-        System.out.println();
-		s.close();
+
+		cout << endl;
 	}
 }
