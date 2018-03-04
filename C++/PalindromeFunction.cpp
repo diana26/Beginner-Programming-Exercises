@@ -21,29 +21,30 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <utility>
 
 using namespace std;
-int main()
-{
-	int n;
-	string s;
-	cin >> n;
-	for (int i = 0; i < n; i++)
+
+string isPalindrome(string str) {
+	string answer;
+	for (int i = 0; i < str.length(); i++)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
+		if (str[i] != str[str.length() -i- 1])
 		{
-			cout << s << endl;
+			answer = "NO";
+				break;
 		}
 		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
+			answer = "YES";
 	}
+	return answer;
+}
+
+int main()
+{
+	string s ;
+	cin >> s;
+	cout << isPalindrome(s);
 	return 0;
 }
 

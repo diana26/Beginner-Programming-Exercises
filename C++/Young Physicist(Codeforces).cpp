@@ -26,24 +26,25 @@
 using namespace std;
 int main()
 {
-	int n;
-	string s;
+	int n, x, countX = 0, countY = 0, countZ = 0;
 	cin >> n;
 	for (int i = 0; i < n; i++)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
-		{
-			cout << s << endl;
-		}
-		else
-		{
+		
+			cin >> x;
+			countX = countX + x;
+			cin >> x;
+			countY = countY + x;
+			cin >> x;
+			countZ = countZ + x;
 			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
 	}
+	if (countX == 0 && countY == 0 && countZ == 0)
+	{
+		cout << "YES";
+	}
+	else
+		cout << "NO";
 	return 0;
 }
 

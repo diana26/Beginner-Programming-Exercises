@@ -21,29 +21,44 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <utility>
 
 using namespace std;
+
 int main()
 {
-	int n;
-	string s;
+	string n;
 	cin >> n;
-	for (int i = 0; i < n; i++)
+	bool flag = true;
+	for (int i = 0; i < n.length();)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
+		if (n[i] == '1')
 		{
-			cout << s << endl;
+			i++;
+			if (n[i] == '4')
+			{
+				i++;
+				if (n[i] == '4')
+				{
+					
+					i++;
+				}
+			}
+			
 		}
 		else
 		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
+			cout << "NO";
+			flag = false;
+			break;
 		}
+		
 	}
+	if (flag)
+	{
+		cout << "YES";
+	}
+
 	return 0;
 }
 

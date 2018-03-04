@@ -21,29 +21,36 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <utility>
 
 using namespace std;
+long long Array[1000005];
 int main()
 {
 	int n;
-	string s;
 	cin >> n;
+	vector<long long>numbers;
 	for (int i = 0; i < n; i++)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
-		{
-			cout << s << endl;
-		}
-		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
+		cin >> Array[i];
 	}
+	long long  x = INT_MAX;
+	long long  y = INT_MAX;
+	for (int i = 0; i < n; i++)
+	{
+		x = min(x, Array[i]);
+	}
+	for (int i = 0; i < n; i++)
+	{
+		if (x == Array[i])
+			numbers.push_back(i);
+	}
+	
+	for (int i = 1; i < numbers.size(); i++)
+	{
+		y = min(y, numbers[i] - numbers[i - 1]);
+	}
+	cout << y;
 	return 0;
 }
 

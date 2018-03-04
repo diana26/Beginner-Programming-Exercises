@@ -1,6 +1,7 @@
 
 #include <map>
 #include <set>
+#include <unordered_set>
 #include <list>
 #include <cmath>
 #include <ctime>
@@ -21,29 +22,30 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <utility>
 
 using namespace std;
-int main()
-{
-	int n;
-	string s;
-	cin >> n;
-	for (int i = 0; i < n; i++)
+char first_recurrence(string &s) {
+	unordered_set<char>letters;
+	for (int i = 0; i < s.length(); i++)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
+		char x = s[i];
+
+		if (letters.find(x) != letters.end())
 		{
-			cout << s << endl;
+			return x;
 		}
 		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
+			letters.insert(x);
 	}
+	return '/0';
+}
+
+int main()
+{
+	string s;
+	cin >> s;
+	cout << first_recurrence(s);
 	return 0;
 }
 

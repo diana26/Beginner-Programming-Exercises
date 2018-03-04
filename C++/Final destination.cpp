@@ -21,29 +21,40 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <utility>
 
 using namespace std;
+struct coordenates {
+	int x;
+	int y;
+};
+
 int main()
 {
-	int n;
+	int  ans1 = 0, ans2 = 0;
 	string s;
-	cin >> n;
-	for (int i = 0; i < n; i++)
+	cin >> s;
+	coordenates a[100] = { 0 }, b[100] = { 0 };
+	for(int i =0; i<s.length(); i++)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
-		{
-			cout << s << endl;
+		if (s[i] == 'L') {
+			ans1 = ans1 + a[i].x - 1;
 		}
-		else
+		else if (s[i] == 'R') {
+			ans1 = ans1 + a[i].x + 1;
+		}
+		else if (s[i] == 'U') {
+			ans2 = ans2  + b[i].y + 1;
+		}
+		else if (s[i] == 'D')
 		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
+			ans2 = ans2 + b[i].y - 1;
 		}
 	}
+	
+	cout << ans1;
+	cout << " ";
+	cout << ans2;
 	return 0;
 }
 

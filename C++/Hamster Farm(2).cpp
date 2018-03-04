@@ -1,4 +1,4 @@
-
+﻿
 #include <map>
 #include <set>
 #include <list>
@@ -21,29 +21,34 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <unordered_set>
+#include <utility>
 
 using namespace std;
+
 int main()
 {
-	int n;
-	string s;
-	cin >> n;
-	for (int i = 0; i < n; i++)
+	long long N, K;
+	
+	long long ans, minimun, champ;
+	long long maxi = LONG_MAX;
+	cin >> N >> K;
+	vector<long long>Array(K);
+	for (int i = 1; i <= K; i++)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
-		{
-			cout << s << endl;
-		}
-		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
+		cin >> i;
+		Array.push_back(i);
 	}
+	for (int i = 1; i <= K; i++)
+	{
+		maxi = min(maxi, N%Array[i]);
+	}
+	for (int i = 1; i <= K; i++)
+	{
+		if (N%Array[i] == maxi)
+			ans = i;
+	}
+	cout << ans << " " << N / Array[ans];
 	return 0;
 }
 

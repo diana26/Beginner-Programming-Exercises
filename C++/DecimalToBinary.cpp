@@ -1,4 +1,4 @@
-
+﻿
 #include <map>
 #include <set>
 #include <list>
@@ -21,28 +21,36 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <unordered_set>
+#include <utility>
 
 using namespace std;
+
+
+stack<int>bits;
+int convertToBinary(int x)
+{
+	if (x == 1)
+	{
+		bits.push(x);
+		return 1;
+	}
+	else
+	{
+		bits.push(x%2);
+		return convertToBinary(x / 2);
+	}
+}
+
 int main()
 {
-	int n;
-	string s;
-	cin >> n;
-	for (int i = 0; i < n; i++)
+	long long x;
+	cin >> x;
+	convertToBinary(x);
+	while(!bits.empty())
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
-		{
-			cout << s << endl;
-		}
-		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
+		cout << bits.top();
+		bits.pop();
 	}
 	return 0;
 }

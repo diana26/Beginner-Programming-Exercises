@@ -24,26 +24,16 @@
 
 
 using namespace std;
+long long Array[1000005];
 int main()
 {
-	int n;
-	string s;
-	cin >> n;
-	for (int i = 0; i < n; i++)
-	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
-		{
-			cout << s << endl;
-		}
-		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
-	}
+	int a = 10;
+	int *p;
+	p = &a;
+	printf("%d\n", p);
+	printf("%d\n", a);
+	printf("%d\n", &a);
+	printf("Operation sum: %d\n", &a+1);
 	return 0;
 }
 

@@ -21,29 +21,35 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-
+#include <utility>
 
 using namespace std;
+
+bool answer(char x) {
+	if (x == 'a' || x == 'e' || x == 'i' || x == 'o' || x == 'u' || x == 'y')
+		return true;
+	return false;
+}
+
+
 int main()
 {
 	int n;
-	string s;
 	cin >> n;
+	string s;	
+	cin  >> s;
+	string Aux = "";
 	for (int i = 0; i < n; i++)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
-		{
-			cout << s << endl;
-		}
+		if (!i)
+			Aux += s[i];
+		else if (answer(s[i]) && answer(s[i - 1]))
+			continue;
 		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
+			Aux += s[i];
 	}
+		cout << Aux;
+	
 	return 0;
 }
 

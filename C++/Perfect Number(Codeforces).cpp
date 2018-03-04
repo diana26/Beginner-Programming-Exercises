@@ -24,26 +24,30 @@
 
 
 using namespace std;
+int perfect(int x){
+	int answer = 0;
+	while (x)
+	{
+		answer += x % 10;
+		x /= 10;
+	}
+	return answer;
+}
+int  n;
 int main()
 {
-	int n;
-	string s;
 	cin >> n;
-	for (int i = 0; i < n; i++)
+	int ans = 0;
+	while (n)
 	{
-		cin >> s;
-		if (s.length() < 11 || s.length() > 100)
+		ans++;
+		if (perfect(ans) == 10)
 		{
-			cout << s << endl;
+			n--;
 		}
-		else
-		{
-			
-				int x = s.length() - 2;
-				cout << s[0] << x << s[s.length() - 1] << endl;
-			
-		}
+		
 	}
+	cout << ans;
 	return 0;
 }
 
