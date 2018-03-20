@@ -25,30 +25,28 @@
 #include <utility>
 
 using namespace std;
-typedef long long ll;
-const int N = 1e5 + 10;
-ll Array[N];
+
+int Fib(int n) {
+	if (n < 2)
+		return n;
+	int F1 = 0;
+	int F2 = 1;
+	int F;
+	for (int i = 0; i < n; i++)
+	{
+		F = F1 + F2;
+		F1 = F2;
+		F2 = F;
+	}
+	return F;
+		
+}
+
 int main()
 {
-	ll n, K;
-	long long ans, minimun, champ;
-	long long maxi = LONG_MAX;
-	cin >> n >> K;
-	
-	for (int i = 1; i <= K; i++)
-	{
-		cin >> Array[i];
-	}
-	for (int i = 1; i <= K; i++)
-	{
-		maxi = min(maxi, n%Array[i]);
-	}
-	for (int i = 1; i <= K; i++)
-	{
-		if (n%Array[i] == maxi)
-			ans = i;
-	}
-	cout << ans << " " << n / Array[ans];
+	int n;
+	cin >> n;
+	cout << Fib(n);
 	return 0;
 }
 
