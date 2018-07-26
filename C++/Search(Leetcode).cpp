@@ -26,38 +26,52 @@
 
 using namespace std;
 
-
-
-int BinarySearch(long long A[1000], int n, int x) {
+int BinarySearch(vector<int>myVect, int n, int x) {
 	int start = 0;
-	int end = n-1;
-	while (start <= end)
-	{
-		int mid = (start + end) / 2;
-		if (x == A[mid])
-			return x;
-		else if (x > A[mid])
-			end = mid - 1;
-		else
-			start = mid + 1;
+	int end = n - 1;
+
+	if (myVect[start] > x) {
+		return start;
+	}
+	else if (myVect[end] < x) {
+		return myVect.size();
+	}
+	else {
+		while (start <= end)
+		{
+			int mid = ((end - start) << 1) + start;
+			if (myVect[mid] == x)
+				return mid;
+			if (myVect[mid] > x) {
+				end = mid - 1;
+				return mid;
+			}
+			else {
+				start = mid + 1;
+				return mid;
+			}
+		}
 	}
 	return -1;
 }
 
 int main()
 {
-	long long  Array[1000];
-	int n, x;
+	vector<int> myVect = { 1, 3, 5, 9, 10 };
+	int n = myVect.size() - 1;
+	int x = 11;
+	//long long  Array[1000];
+	/*int n, x;
 	cin >> n >> x;
 	for (int i = 0; i < n; i++)
 	{
 		cin >> Array[i];
-	}
-	int result = BinarySearch(Array, n, x);
+	}*/
+	int result = BinarySearch(myVect, n, x);
 	if (result == -1)
 		cout << "It is not in the list";
 	else
-		cout << "Yes, it is in the list, in the position:";
+		cout << result;
 	return 0;
 }
 
