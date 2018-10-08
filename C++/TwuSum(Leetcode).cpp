@@ -42,12 +42,13 @@ vector<int> TwoSum(vector<int>myVect, int x) {
 			save.insert(myVect[i]);
 	}
 	if (y != 0 && w != 0) {
-			ans.push_back(y);
+			
 			for (int i = 0; i < myVect.size(); i++) {
 				if (myVect[i] == w)
 					w = i;
 			}
 			ans.push_back(w);
+			ans.push_back(y);
 	}
 	return ans;
 }
