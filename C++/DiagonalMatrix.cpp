@@ -13,12 +13,14 @@
 #include <sstream>
 #include <set>
 #include <iomanip>
-#include <string.h>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <limits.h>
 #include <iterator>
 #include <complex>
+//#include <assert>
+#include <thread>
 
 #ifdef _MSC_VER
 #  include <intrin.h>
@@ -56,36 +58,34 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
+
+void pyramid(vector<vector<int>> A) {
+	vector<vector<int>> ans(2 * A.size() - 1);
+	for (int i = 0; i < A.size(); i++) {
+		for (int j = 0; j < A.size(); j++) {
+			ans[i + j].push_back(A[i][j]);
 		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+	}
+	cout << A.size();
+	for (int i = 0; i < A.size(); i++) {
+		for (int j = 0; j < ans.size(); j++) {
+			cout << ans[i][j] << " ";
+		}
 	}
 }
 
-
-
-//----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	vector<vector<int>> v = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9 } };
+	pyramid(v);
+	/*for (int i = 0; i < ans.size(); i++) {
+		for (int j = 0; j < ans.size(); j++) {
+			cout << ans[i][j];
+		}
+	}*/
 	return 0;
 }
+
 
 //======================================================================================================================

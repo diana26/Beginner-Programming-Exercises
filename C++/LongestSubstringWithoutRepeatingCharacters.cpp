@@ -56,35 +56,41 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
+set<int>s1;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
+int LengthofSubs(string s) {
+	int ans = INT_MIN;
+	int p1 = 0;
+	if (s.length() <= 0)
+		return 0;
+	else if (s.length() == 1)
+		return 1;
+	else {
+		for (int i = 1; i < s.length(); i++) {
+			if (s1.empty())
+				s1.insert(s[p1]);
+			if (s1.find(s[i]) != s1.end()) {
+				ans = max(ans, (i  - p1));
+				p1 = i - 1;
+				s1.clear();
 			}
+			else {
+				s1.insert(s[i]);				
+			}
+			ans = max(ans, ((i +1) - p1));
 		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+		
 	}
+	return ans;
 }
 
 
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	string s = "abcabcbb";
+	cout << LengthofSubs(s);
 	return 0;
 }
 

@@ -56,35 +56,47 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
+map<string, multiset<string>> m;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
-		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+string SortString(string s) {
+	string str;
+	int arr[26] = { 0 };
+	for (int i = 0; i < s.length(); i++) {
+		arr[s[i] - 'a']++;
 	}
+	for (int i = 0; i < 26; i++) {
+		for (int j = 0; j < arr[i]; j++) {
+			str += (char)('a' + i);
+		}
+	}
+	return str;
+}
+vector<vector<string>> GroupAnagrams(vector<string>strs) {
+	for (string s : strs) {
+		string st = SortString(s);
+		m[st].insert(s);
+	}
+	vector<vector<string>>ans;
+	for (auto mp : m) {
+		vector<string> anagram(mp.second.begin(), mp.second.end());
+		ans.push_back(anagram);
+	}
+	return ans;
 }
 
 
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	vector<string>vect =  {"eat", "tea", "tan", "ate", "nat", "bat"};
+	vector<vector<string>> ans = GroupAnagrams(vect);
+	cout << ans.size();
+	/*for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			cout << ans[i][j] << " ";
+		}
+	}*/
 	return 0;
 }
 

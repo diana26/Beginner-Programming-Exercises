@@ -55,36 +55,54 @@ typedef pair<ll, ll> ii;
 typedef vector<ii> vii;
 
 #define MOD 1000000007
-//----------------------------------------------------------------------------------------------------------------------
-set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
-		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+struct Node {
+	Node *next;
+	int value;
+	Node(int x) {
+		this->value = x;
+	}
+};
+
+void InsertElement(Node * root, int x) {
+	Node *n = new Node(x);
+	n->next = root;
+	root = n;
+}
+
+void PrintLK(Node*root) {
+	while (root != NULL) {
+		cout << root->value << "->";
+		root = root->next;
 	}
 }
 
+Node * InsertEle(Node * root, int x) {
+	if (root == NULL) {
+		root = new Node(x);
+		return root;
+	}
+	Node *aux = root;
+	while (aux->next != NULL && aux->next->value < x) {
+		aux = aux->next;
+	}
+	Node *newNode = new Node(x);
+	aux->next = newNode;
+	newNode = aux;
 
+	return aux;
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	struct Node *root = NULL;
+	InsertElement(root, 2);
+	InsertElement(root, 3);
+	InsertElement(root, 5);
+	InsertElement(root, 7);
+	//InsertEle(root, 4);
+	PrintLK(root);
 	return 0;
 }
 

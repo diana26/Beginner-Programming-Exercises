@@ -13,12 +13,14 @@
 #include <sstream>
 #include <set>
 #include <iomanip>
-#include <string.h>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <limits.h>
 #include <iterator>
 #include <complex>
+//#include <assert>
+#include <thread>
 
 #ifdef _MSC_VER
 #  include <intrin.h>
@@ -56,36 +58,41 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
+
+int kthSmallest(int arr[], int r, int l, int k) {
+	if (k > 0 && k <= r - l + 1) {
+		int pos = auxiliarFunc(arr, r, l);
+		if (pos == k)
+			return arr[pos];
+		else if (pos > k) {
+			return kthSmallest(arr, l, pos + 1, k);
 		}
 		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+			return kthSmallest(arr, pos + 1, r, k);
 	}
+	return INT_MAX;
 }
 
+int auxiliarFunc(int arr[], int r, int l) {
+	int x = arr[r], i = l;
+	for (int j = l; j <= r - 1; j++) {
+		if (arr[j] <= arr[i]) {
+			swap(arr[j], arr[i]);
+			i++;
+		}
+	}
+	swap(arr[i], arr[r]);
+	return i;
+}
 
-
-//----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	int arr[] = { 12, 3, 5, 7, 4, 19, 26 };
+	int n = sizeof(arr) / sizeof(arr[0]), k = 3;
+	cout << "K'th smallest element is " << kthSmallest(arr, 0, n - 1, k);
 	return 0;
 }
+
 
 //======================================================================================================================

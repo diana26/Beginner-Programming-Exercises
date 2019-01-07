@@ -56,35 +56,36 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
-
+//int arr[10] = { 0 };
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
-		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
-	}
-}
+
 
 
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	string s;
+	cin >> s;
+	int up = 0, low = 0;
+	FOR(i, 0, s.length()) {
+		if (s[i] >= 97 && s[i] <= 122)
+			low++;
+		else if (s[i] >= 65 && s[i] <= 90)
+			up++;
+	}
+	if (low >= up) {
+		FOR(i, 0, s.length()) {
+			if (s[i] >= 65 && s[i] <= 90)
+				s[i] = s[i] + 32;
+		}
+	}
+	else if (up > low) {
+		FOR(i, 0, s.length()) {
+			if (s[i] >= 97 && s[i] <= 122)
+				s[i] = s[i] - 32;
+		}
+	}
+	cout << s;
 	return 0;
 }
 

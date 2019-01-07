@@ -36,7 +36,6 @@ void Longest(char *s) {
 	for (int i = 0; i < n; ++i)
 		table[i][i] = true;
 
-	// check for sub-string of length 2. 
 	int start = 0;
 	for (int i = 0; i < n - 1; ++i)
 	{

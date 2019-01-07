@@ -25,25 +25,30 @@
 #include <utility>
 
 using namespace std;
+stack<int>st;
 
-
-int MaxSumOfArray(vector<int> MyVect) {
-	int max = 0;
-	int max_sum = 0;
-	for (int i = 0; i < MyVect.size(); i++) {
-		max_sum = max_sum + MyVect[i];
-		if (max_sum < 0) 
-			max_sum = 0;
-		if (max < max_sum)
-			max = max_sum;
-		
+int main()
+{
+	stack<int>st;
+	int n, ans = 0, x;
+	cin >> n;
+	cin >> x;
+	st.push(x);
+	for (int i = 0; i < n-1; i++) {
+		cin >> x;
+		if (x == 0)
+			st.pop();
+		else
+			st.push(x);
 	}
-	return max;
-}
-
-int main() {
-	vector<int> ans = { -2, -1, -3, 4, -1, 2, 1, -5, 4 };
-	cout << MaxSumOfArray(ans);
+	while (!st.empty())
+	{
+		ans = ans + st.top();
+		st.pop();
+	}
+	
+	cout << ans;
 	return 0;
-
 }
+
+

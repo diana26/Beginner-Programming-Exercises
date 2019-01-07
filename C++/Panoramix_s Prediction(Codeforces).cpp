@@ -1,4 +1,4 @@
-﻿
+
 #include <map>
 #include <set>
 #include <list>
@@ -21,29 +21,24 @@
 #include <iostream>
 #include <algorithm>
 #include <unordered_map>
-#include <unordered_set>
-#include <utility>
 
 using namespace std;
 
-
-int MaxSumOfArray(vector<int> MyVect) {
-	int max = 0;
-	int max_sum = 0;
-	for (int i = 0; i < MyVect.size(); i++) {
-		max_sum = max_sum + MyVect[i];
-		if (max_sum < 0) 
-			max_sum = 0;
-		if (max < max_sum)
-			max = max_sum;
-		
+int main()
+{
+	int n, m, ArrayPrime[15] = { 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47 };
+	string ans;
+	cin >> n >> m;
+	for (int i = 0; i < 15; i++)
+	{
+		if (n == ArrayPrime[i])
+		{
+			if (ArrayPrime[i + 1] == m)
+				ans = "YES";
+			else
+				ans = "NO";
+		}
 	}
-	return max;
-}
-
-int main() {
-	vector<int> ans = { -2, -1, -3, 4, -1, 2, 1, -5, 4 };
-	cout << MaxSumOfArray(ans);
+			cout << ans;
 	return 0;
-
 }

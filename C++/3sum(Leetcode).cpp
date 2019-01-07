@@ -59,32 +59,53 @@ typedef vector<ii> vii;
 set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
+vector<vector<int>> threeSum(vector<int>nums) {
+	sort(nums.begin(), nums.end());
+	vector<vector<int>> ans;
+	for (int i = 0; i < nums.size(); i++) {
+		if (i > 0 && nums[i] == nums[i - 1]) {
+			continue; 
 		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+		if (nums[i] > 0) {
+			break; 
+		}
+		int l = i + 1, r = nums.size() - 1;
+		while (l < r) {
+			if (nums[l] + nums[i] + nums[r] == 0) {
+				vector<int> temp({ nums[i], nums[l], nums[r] });
+				ans.push_back(temp);
+				l += 1;
+				while (l < nums.size() && (nums[l] + nums[r] + nums[i]) == 0) {
+					l += 1; 
+				}
+			}
+			else if (nums[l] + nums[i] + nums[r] > 0) {
+				r--;
+			}
+			else if (nums[l] + nums[i] + nums[r] < 0) {
+				l++;
+			}
+			
+		}
 	}
+	for (int i = 0; i < ans.size(); i++) {
+
+	}
+	return ans;
 }
 
 
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	vector<int>v = { -1, 0, 1, 2, -1, -4};
+	vector<vector<int>> ans = threeSum(v);
+	for (int i = 0; i < ans.size(); i++) {
+		for (int j = 0; j < 3; j++) {
+			cout << ans[i][j] << " ";
+		}
+		cout << endl;
+	}
 	return 0;
 }
 

@@ -13,12 +13,14 @@
 #include <sstream>
 #include <set>
 #include <iomanip>
-#include <string.h>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <limits.h>
 #include <iterator>
 #include <complex>
+//#include <assert>
+#include <thread>
 
 #ifdef _MSC_VER
 #  include <intrin.h>
@@ -56,36 +58,53 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
+
+vector<int> bfs(int n, int m, int i) {
+	queue<int> q;
+	q.push(i);
+	int step;
 	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
+	while (!q.empty()) {
+		step = q.front();
+		q.pop();
+		if (step <= m && step >= n) {
+			ans.push_back(step);
 		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+		if (i == 0 || step > m)
+			continue;
+		int last = step % 10;
+		int step1 = step * 10 + (last + 1);
+		int step2 = step * 10 + (last - 1);
+		//cout << step1 << " " << step2 << endl;
+		if (last == 0)
+			q.push(step1);
+		else if (last == 9)
+			q.push(step2);
+		else {
+			q.push(step1);
+			q.push(step2);
+		}
 	}
+	return ans;
 }
 
+vector<int> Solution(int n, int m) {
+	vector<int>ans;
+	for (int i = 0; i <= 9; i++) {
+		bfs(n, m, i);
+	}
+	return ans;
+}
 
-
-//----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	vector<int>v = Solution(11, 20);
+	for (int i = 0; i < v.size(); i++) {
+		cout << v[i] << " ";
+	}
 	return 0;
 }
+
 
 //======================================================================================================================

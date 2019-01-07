@@ -56,35 +56,37 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
-
+//int arr[10] = { 0 };
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
-		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
-	}
-}
+
 
 
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	int arr[10] = { 0 };
+	int x, y;
+	int aux = 0;
+	cin >> x;
+
+	int ans = x;
+	while (aux != 4) {
+		aux = 0;
+		x = ans;
+		++x;
+		ans = x;
+		while (x) {
+			y = x % 10;
+			arr[y]++;
+			x = x / 10;
+		}
+		FOR (i, 0, 10) {
+			if (arr[i] == 1)
+				aux = aux + 1;
+		}
+		memset(arr, 0, sizeof(arr));
+	}
+	cout << ans;
 	return 0;
 }
 

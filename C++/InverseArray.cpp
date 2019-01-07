@@ -19,6 +19,8 @@
 #include <limits.h>
 #include <iterator>
 #include <complex>
+#include <assert.h>
+#include <thread>
 
 #ifdef _MSC_VER
 #  include <intrin.h>
@@ -56,36 +58,32 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
+
+vector<vector<int>> performOps(vector<vector<int>> A) {
+	vector<vector<int>> B;
+	B.resize(A.size());
+	for (int i = 0; i < A.size(); i++) {
+		B[i].resize(A[i].size());
+		for (int j = 0; j < A.size(); j++) {
+			B[i][A[i].size() - 1 - j] = A[i][j];
 		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
 	}
+	return B;
 }
 
-
-
-//----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	vector<vector<int>>A = { {1, 2, 3, 4},{5, 6, 7, 8},{9, 10, 11, 12} };
+	vector <vector<int>> B = performOps(A);
+	for (int i = 0; i < B.size(); i++) {
+		for (int j = 0; j < B[i].size(); j++) {
+			cout << B[i][j] << " ";
+		}
+	}
 	return 0;
+
 }
+
 
 //======================================================================================================================

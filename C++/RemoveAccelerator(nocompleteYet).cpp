@@ -56,35 +56,76 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
+struct Node {
+	Node *next;
+	char value;
+	Node(char s) {
+		this->value = s;
+	}
+};
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
-		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+void InsertElement(Node ** root, char x) {
+	Node *n = new Node(x);
+	n->next = *root;
+	*root = n;
+}
+
+void PrintElements(Node ** root) {
+	while (root) {
+		cout << root->value << " ";
+		root = root->next;
 	}
 }
 
+int removeAccelerator(Node *root) {
+	int count = 0;
+	if (root == NULL) {
+		return -1;
+	}
+	Node *aux = root;
 
+	/*while (aux->next != NULL && aux->next->value != '&') {
+		aux = aux->next;
+	}
+	if (aux->next == NULL) {
+		return -1;
+	}
+	aux->next = aux->next->next;
+	while(aux != NULL) {
+		/*if (aux->value != 'a' || aux->value != 'i' || aux->value != 'E') {
+			count++;
+			break;
+		}
+		cout << aux->value << "->";
+		aux = aux->next;
+	}*/
+
+	if (aux->next->next != NULL && aux->next->value == '&') {
+		Node *temp = aux;
+		aux = aux->next->next;
+		temp->next = NULL;
+		count++;
+	}
+
+	if (aux->next->value == '&') {
+		aux->next = NULL;
+	}
+	
+	return count;
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	struct Node *root = NULL;
+	InsertElement(&root, 'p');
+	InsertElement(&root, 'r');
+	InsertElement(&root, '&');
+	InsertElement(&root, 'i');
+	InsertElement(&root, 'n');
+	InsertElement(&root, 't');
+	cout << removeAccelerator(root);
+	PrintElements(&root);
 	return 0;
 }
 

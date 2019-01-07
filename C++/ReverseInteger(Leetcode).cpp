@@ -13,12 +13,14 @@
 #include <sstream>
 #include <set>
 #include <iomanip>
-#include <string.h>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <limits.h>
 #include <iterator>
 #include <complex>
+//#include <assert>
+#include <thread>
 
 #ifdef _MSC_VER
 #  include <intrin.h>
@@ -56,36 +58,38 @@ typedef vector<ii> vii;
 
 #define MOD 1000000007
 //----------------------------------------------------------------------------------------------------------------------
-set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
-		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+
+int reverse(int x) {
+	long long aux = 0;
+	int ans;
+	bool flag = false;
+	if (x == 0)
+		return 0;
+	else if (x < 0) {
+		flag = true;
 	}
+	x = abs(x);
+	cout << x << endl;
+	while (x > 0) {
+		aux = (aux * 10) + (x % 10);
+		x = x / 10;
+		if (aux > 2147483647) {
+			return 0;
+		}
+	}
+	ans = aux;
+	if (flag == true)
+		return -ans;
+	else
+		return ans;
 }
 
-
-
-//----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	cout << reverse(1534236469);
 	return 0;
 }
+
 
 //======================================================================================================================

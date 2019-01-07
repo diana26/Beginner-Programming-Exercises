@@ -27,20 +27,23 @@
 typedef long long ll;
 using namespace std;
 
-int LengthUniqueElements(vector<int>vec, int n) {
+int LengthUniqueElements(vector<int>&vec, int n) {
 	int ans = 0, p = 0, q = 1;
-	for (int i = 0; i < n; i++) {
+	while (q < n) {
 		if (vec[p] == vec[q]) {
 			q++;
+			if (vec[p] != vec[q]) {
+				p++;
+				vec[p] = vec[q];
+				ans++;
+			}
 		}
-		if (vec[p] != vec[q]) {
-			p++;
-			vec[p] = vec[q];
-			q++;
-
+		else if (vec[p] != vec[q]) {
+			p++;  q++;
 		}
+		//ans++;
 	}
-	return p;
+	return vec.size() - ans;
 }
 
 

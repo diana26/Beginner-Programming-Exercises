@@ -55,36 +55,26 @@ typedef pair<ll, ll> ii;
 typedef vector<ii> vii;
 
 #define MOD 1000000007
-//----------------------------------------------------------------------------------------------------------------------
-set<int>s;
 
 //----------------------------------------------------------------------------------------------------------------------
-void twoSum(vector<int>vec, int target) {
-	vector<int>ans;
-	for (int i = 0; i < vec.size(); i++) {
-		if (s.empty())
-			s.insert(vec[i]);
-		else if (s.find(target - vec[i]) != s.end()) {
-			ans.push_back(i);
-			for (int j = 0; j < i; j++) {
-				if (vec[j] + vec[i] == target)
-					ans.push_back(j);
-			}
-		}
-		else
-			s.insert(vec[i]);
- 	}
-	for (int i = 0; i < ans.size(); i++) {
-		cout << ans[i];
+string convertIntToBinary(int x) {
+	string ans = "";
+		while(x > 0) {
+			if (x & 1)
+				ans += "1";
+			else
+				ans += "0";
+			x = x / 2;
 	}
+		for (int i = 0; i < ans.length() / 2; i++) {
+			swap(ans[i], ans[ans.length() - i - 1]);
+		}
+		return ans;
 }
-
-
 
 //----------------------------------------------------------------------------------------------------------------------
 int main() {
-	vector<int>v = { 2, 7, 11, 15 };
-	twoSum(v, 9);
+	cout << convertIntToBinary(6);
 	return 0;
 }
 
