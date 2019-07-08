@@ -48,9 +48,33 @@ void print(Node * head) {
 Node * SumTwoLinkedList(Node *a, Node *b) {
 	Node *head = new Node();
 	Node *aux = head;
-	int answer = 0, carry = 0;
+	Node *aux2 = a;
+	Node *aux3 = b;
+	int answer = 0, carry = 0, len1 = 0, len2 = 0;
+	while (aux2 != NULL) {
+		len1++;
+		aux2 = aux2->next;
+	}
+	while (aux3 != NULL) {
+		len2++;
+		aux3 = aux3->next;
+	}
+	while (len1 > len2) {
+		Node *curr = new Node();
+		curr->value = 0;
+		curr->next = b;
+		b = curr;
+		len2++;
+	}
+	while (len1 < len2) {
+		Node *curr2 = new Node();
+		curr2->value = 0;
+		curr2->next = a;
+		a = curr2;
+		len1++;
+	}
 	while (a || b) {
-		
+
 		answer = (a ? a->value : 0) + (b ? b->value : 0) + carry;
 		Node *aux2 = new Node();
 		aux2->value = answer % 10;
@@ -69,7 +93,7 @@ Node * SumTwoLinkedList(Node *a, Node *b) {
 		aux->next = new Node();
 		aux->next->value = 1;
 	}
-	
+
 	head = head->next;
 	return head;
 }
@@ -86,6 +110,7 @@ int main() {
 	push(&head2, 1);
 	push(&head2, 4);
 	push(&head2, 6);
+	push(&head2, 7);
 	SumTwoLinkedList(head, head2);
 	return 0;
 }
