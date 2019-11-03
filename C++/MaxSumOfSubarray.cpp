@@ -32,17 +32,17 @@ int MaxSumOfArray(vector<int> MyVect) {
 	int max_sum = 0;
 	for (int i = 0; i < MyVect.size(); i++) {
 		max_sum = max_sum + MyVect[i];
-		if (max_sum < 0) 
+		if (max_sum < 0)
 			max_sum = 0;
 		if (max < max_sum)
 			max = max_sum;
-		
+
 	}
 	return max;
 }
 
 int main() {
-	vector<int> ans = { -2, -1, -3, 4, -1, 2, 1, -5, 4 };
+	vector<int> ans = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
 	cout << MaxSumOfArray(ans);
 	return 0;
 
